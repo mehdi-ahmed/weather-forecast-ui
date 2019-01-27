@@ -1,0 +1,26 @@
+<app-layout>
+  <div class="jumbotron">
+    <h1>Temperatures by Location</h1>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+    <th>Code</th>
+    <th>City</th>
+    <th>Temperature</th>
+    <th>temperature Limit</th>
+    <th>Time measured</th>
+    <th>Exceeds</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let city of temperatureList">
+      <td>{{city.code}}</td>
+      <td>{{city.cityName}}</td>
+      <td>{{city.temperature}}</td>
+      <td>{{city.temperatureLimit}}</td>
+      <td>{{city.measureTime}}</td>
+      <td>{{city.exceeds}}</td>
+    </tr>
+    </tbody>
+  </table>
+</app-layout>
