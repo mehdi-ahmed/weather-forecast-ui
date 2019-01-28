@@ -16,12 +16,20 @@ export class ListLocationsTemperaturesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.citySelected;
+    if(this.citySelected == undefined || this.citySelected == null ||this.citySelected =='') {
+      this.citySelected = 'London';
+    }
+    this.getForecastByCity(this.citySelected);
+  }
 
-    this.citySelected = 'Paris';
+  receiveMessage($event) {
+    this.citySelected = $event;
     this.getForecastByCity(this.citySelected);
   }
 
   private getForecastByCity(citySelected) {
+    console.log('inside getForecastByCity');
     this._temperatureService.getForecastByCity(citySelected)
 
       .then((data: Forecast[]) => {
@@ -34,5 +42,6 @@ export class ListLocationsTemperaturesComponent implements OnInit {
   getColor(exceed: boolean) {
     return exceed == true ? "red" : "green";
   }
+
 }
 

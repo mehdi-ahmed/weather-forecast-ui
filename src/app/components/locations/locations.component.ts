@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LocationService} from "../../shared/services/location-service";
 import {Location} from "../../shared/model/location.model";
 import {ForecastService} from "../../shared/services/forecast.service";
@@ -12,11 +12,15 @@ import {Forecast} from "../../shared/model/forecast-temperature.model";
 export class LocationsComponent implements OnInit {
 
   public locationsList: Location[];
+  @Output() messageEvent =  new EventEmitter<string>();
 
   public selectedLocation: string;
-  @Output() data = new EventEmitter();
 
-  constructor(private _locationService: LocationService, private _temperatureService: ForecastService) {
+  constructor(private _locationService: LocationService, private _temperatureService: ForecastService){
+  }
+
+  sendMessage(){
+    this.messageEvent.emit(this.selectedLocation);
   }
 
   ngOnInit() {
@@ -29,9 +33,9 @@ export class LocationsComponent implements OnInit {
       });
   }
 
-
   onLocationSelect(val: any) {
     this.selectedLocation = val.target.value;
+    this.sendMessage();
 
     this._temperatureService.getForecastByCity(this.selectedLocation)
 

@@ -3,7 +3,7 @@
     <h1>Temperatures by Location</h1>
   </div>
 
-  <app-locations></app-locations>
+  <app-locations (messageEvent)="receiveMessage($event)"></app-locations>
 
   <table class="table table-hover">
     <thead>
