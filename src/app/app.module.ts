@@ -1,12 +1,14 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {TemperatureService} from './shared/services/temperature.service';
+import {ForecastService} from './shared/services/forecast.service';
 
 import {AppComponent} from './app.component';
 import {UiModule} from './ui/ui.module';
 import {ListLocationsTemperaturesComponent} from './components/list-locations-temperatures/list-locations-temperatures.component';
-import { Routes, RouterModule} from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import {RouterModule, Routes} from '@angular/router';
+import {HttpClientModule} from '@angular/common/http';
+import {ApiService} from "./shared/services/api-service";
+import {LocationsComponent} from './components/locations/locations.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -19,7 +21,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    ListLocationsTemperaturesComponent
+    ListLocationsTemperaturesComponent,
+    LocationsComponent
   ],
   imports: [
     HttpClientModule,
@@ -30,7 +33,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [TemperatureService],
+  providers: [ForecastService, ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

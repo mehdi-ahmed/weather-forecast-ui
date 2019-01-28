@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Temperature} from "../../shared/model/locations-temperature.model";
-import {TemperatureService} from "../../shared/services/temperature.service";
+import {Forecast} from "../../shared/model/forecast-temperature.model";
+import {ForecastService} from "../../shared/services/forecast.service";
 import {Router, RouterModule} from '@angular/router';
 
 @Component({
@@ -10,30 +10,24 @@ import {Router, RouterModule} from '@angular/router';
 })
 export class ListLocationsTemperaturesComponent implements OnInit {
 
-  public temperatureList: Temperature[];
+  public temperatureList: Forecast[];
 
-  constructor(private _temperatureService: TemperatureService, private _router: Router, private _routerModule: RouterModule) {
+  constructor(private _temperatureService: ForecastService, private _router: Router, private _routerModule: RouterModule) {
   }
 
   ngOnInit() {
 
-    this._temperatureService.getAllTemperatures()
+    this._temperatureService.getForecastByCity('Paris')
 
-      .then((data: Temperature[]) => {
+      .then((data: Forecast[]) => {
         this.temperatureList = data;
       })
       .catch(() => {
       });
+  }
 
-    /*ngOnInit() {
-      this._temperatureService.getAllTemperatures().
-
-      subscribe(data => {
-        this.temperatureList = data;
-      });
-    }*/
-
-
+  getColor(exceed: boolean) {
+    return exceed == true ? "red" : "green";
   }
 }
 
