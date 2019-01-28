@@ -9,6 +9,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {ApiService} from "./shared/services/api-service";
 import {LocationsComponent} from './components/locations/locations.component';
+import {LocationService} from "./shared/services/location-service";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -33,7 +34,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [ForecastService, ApiService],
+  providers: [ForecastService, ApiService, LocationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

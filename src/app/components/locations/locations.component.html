@@ -1,0 +1,7 @@
+<div controller="myCtrl">
+  <select (change)="onLocationSelect($event)" (ngModel)="selectedLocation">
+    <option *ngFor="let loc of locationsList" (change)="onLocationSelect(loc.name)">{{loc.name}}
+    </option>
+  </select>
+</div>
+

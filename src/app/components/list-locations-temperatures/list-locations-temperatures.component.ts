@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Forecast} from "../../shared/model/forecast-temperature.model";
 import {ForecastService} from "../../shared/services/forecast.service";
-import {Router, RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-list-locations-temperatures',
@@ -11,13 +10,19 @@ import {Router, RouterModule} from '@angular/router';
 export class ListLocationsTemperaturesComponent implements OnInit {
 
   public temperatureList: Forecast[];
+  public citySelected: string;
 
-  constructor(private _temperatureService: ForecastService, private _router: Router, private _routerModule: RouterModule) {
+  constructor(private _temperatureService: ForecastService) {
   }
 
   ngOnInit() {
 
-    this._temperatureService.getForecastByCity('Paris')
+    this.citySelected = 'Paris';
+    this.getForecastByCity(this.citySelected);
+  }
+
+  private getForecastByCity(citySelected) {
+    this._temperatureService.getForecastByCity(citySelected)
 
       .then((data: Forecast[]) => {
         this.temperatureList = data;
